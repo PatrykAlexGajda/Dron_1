@@ -7,9 +7,13 @@ class InterfejsRysowania
 {
 protected:
     std::shared_ptr<drawNS::Draw3DAPI> rysownik;
+    int indeks[2] = {10, 10};
 
 public:
-    InterfejsRysowania(std::shared_ptr<drawNS::Draw3DAPI> nowy_rysownik) {};
+    InterfejsRysowania() {}
+    //virtual int rysuj();
+    //virtual int usun();
+
 };
 
 #endif

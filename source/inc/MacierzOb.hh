@@ -76,6 +76,23 @@ public:
 
         *this = temp;
     }
+
+    void ObrotY(double alfa){
+
+        MacierzOb temp;
+
+        temp[0][0] = cos((alfa*M_PI)/180);
+        temp[0][1] = 0;
+        temp[0][2] = sin((alfa*M_PI)/180);
+        temp[1][0] = 0;
+        temp[1][1] = 1;
+        temp[1][2] = 0;
+        temp[2][0] = -sin((alfa*M_PI)/180);
+        temp[2][1] = 0;
+        temp[2][2] = cos((alfa*M_PI)/180);
+
+        *this = temp;
+    }
 };
 
 #endif

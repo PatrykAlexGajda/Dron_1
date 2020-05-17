@@ -58,7 +58,7 @@ APIGnuPlot3D::APIGnuPlot3D(double minX, double maxX, double minY, double maxY, d
   }
   else {
     dup2(pipe_fd[0],0);
-    std::cerr << "gnuplot is running" << endl;
+    //std::cerr << "gnuplot is running" << endl;
     execlp("gnuplot","gnuplot",NULL);
   }
 }

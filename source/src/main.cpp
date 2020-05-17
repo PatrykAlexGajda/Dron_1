@@ -8,6 +8,10 @@
 #include "Dron.hh"
 #include "InterfejsRys.hh"
 #include "Draw3D_api_interface.hh"
+#include "powierzchnia.hh"
+#include "dno.hh"
+#include "woda.hh"
+#include "Wirnik.hh"
 
 using std::vector;
 using drawNS::Point3D;
@@ -15,74 +19,76 @@ using drawNS::APIGnuPlot3D;
 using std::cout;
 using std::endl;
 
-/*!
-* \brief Funkcja czekajaca az uzytkownik wcisnie klawisz 'Enter'
-*/
-void wait4key() {
-  do {
-    std::cout << "\n Press 'Enter' to continue..." << std::endl;
-  } while(std::cin.get() != '\n');
+int main(){
+
+std::shared_ptr<drawNS::Draw3DAPI> api(new APIGnuPlot3D(-R,R,-R,R,-R,R,0));
+char czytaj;
+Dron D;
+Wirnik W;
+Dno X;
+Woda Y;
+X.rysuj_pow_dna(api);
+Y.rysuj_pow_wody(api);
+int a = D.rysuj(api);
+int b = W.rysujW(api);
+
+while(1){
+
+  std::cout << "\nz - obrot drona wokol osi OZ\n";
+  std::cout << "x - obrot drona wokol osi OX\n";
+  std::cout << "f - ruch drona do przodu\n";
+  std::cout << "q - koniec programu\n";
+  std::cout << "Wybierz opcje:\t";
+  std::cin >> czytaj;
+  api->erase_shape(a);
+  api->erase_shape(b);
+
+  switch(czytaj){
+
+    case 'z':{
+
+      double kat=0;
+      std::cout << "Podaj kat obrotu: ";
+      std::cin >> kat;
+      MacierzOb mObZ;
+      mObZ.ObrotZ(kat);
+      D.ZmianaOrientacji(mObZ);
+      D.rysuj(api);
+
+    } break;
+
+    case 'x':{
+      char x = 'x';
+      double kat=0;
+      std::cout << "Podaj kat obrotu: ";
+      std::cin >> kat;
+      D.obracanie(api, x, kat);
+      W.obracanieW(api, kat);
+
+    } break;
+
+    case 'f':{
+
+      double odl;
+      std::cout << "Podaj odleglosc: ";
+      std::cin >> odl;
+      D.ruch(api, odl);
+      W.ruchW(api, odl);
+
+    } break;
+
+    case 'q':{
+  
+      return 0;
+
+    } break;
+  }
 }
 
-int main(){
-  
-/*!
-* \brief Lacze z gnuplotem tworzy rysownik 3D o podanych wymiarach
-*/
-  std::shared_ptr<drawNS::Draw3DAPI> api(new APIGnuPlot3D(-300,300,-300,300,-300,300,0));
+wait4key();
+return 0;
 
-  char quit;
-  Dron D;
-
-/*!
-* \brief Petla komunikuje sie z uzytkownikiem i na podstawie wprowadzonych w terminalu danych rysuje przemieszczanie sie drona po plaszczyznie XY
-* Konczy dzialanie po wprowadzeniu litery 'h' lub 'q'
-*/
-  while(quit != 'q' && quit != 'h'){
-
-    double kat = 0;
-    double odl = 0;
-
-    std::cout << "Podaj kat obrotu (dodatni - obrot w lewo, ujemny - w prawo): ";
-    std::cin >> kat;
-    std::cout << "Podaj odleglosc przesuniecia (obszar rysownika - 300x300x300): ";
-    std::cin >> odl;
-
-    D.ruch_plaszczyzna(api, kat, odl);
-
-    std::cout << "Kontynuuj - dowolna litera + 'Enter' \nWylacz program - 'q' + 'Enter' \nZmien wysokosc 'h' + 'Enter' " << std::endl;
-    std::cin >> quit;
-
-    if(quit != 'h' && quit != 'q'){
-    }
-  }
-
-/*!
-* \brief Petla komunikuje sie z uzytkownikiem, na podstawie wprowadzaonych w terminalu danych rysuje przemieszczenie sie drona obracajacego sie wzgledem osi Z
-* Konczy dzialanie po wprowadzeniu litery 'q'
-*/
-  while(quit != 'q'){
-
-    double kat = 0;
-    double odl = 0;
-
-    std::cout << "Podaj kat obrotu (dodatni - do gory, ujemny - w dol): ";
-    std::cin >> kat;
-    std::cout << "Podaj odleglosc przesuniecia (obszar rysownika - 300x300x300): ";
-    std::cin >> odl;
-
-    D.ruch_gora_dol(api, kat, odl);
-
-    std::cout << "Kontynuuj - dowolna litera + 'Enter' " << "\nWylacz program - 'q' + 'Enter' " << std::endl;
-    std::cin >> quit;
-
-    if(quit != 'q'){
-    }
-  }
-
-
-  
-/*  
+/*
 
   std::shared_ptr<drawNS::Draw3DAPI> api(new APIGnuPlot3D(-5,5,-5,5,-5,5,1000)); //włacza gnuplota, pojawia się scena [-5,5] x [-5,5] x [-5,5] odświeżana co 1000 ms
   //drawNS::Draw3DAPI * api = new APIGnuPlot3D(-5,5,-5,5,-5,5,1000); //alternatywnie zwykły wskaźnik
@@ -122,7 +128,7 @@ int main(){
       },{
 	drawNS::Point3D(0,0,3), drawNS::Point3D(0,1,3), drawNS::Point3D(1,2,4)       
 	  }},"blue");//rysuje niebieski graniastosłup
-  cout << "nie pojawiła się niebieski graniastosłup" << endl;
+  cout << "nie pojawia się niebieski graniastosłup" << endl;
   
   wait4key();
 

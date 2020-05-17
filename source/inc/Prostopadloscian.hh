@@ -3,7 +3,7 @@
 
 #include "Bryla.hh"
 #include "Wektor.hh"
-#define A 8
+#define A 2
 
 using std::vector;
 using drawNS::Point3D;
@@ -26,6 +26,8 @@ protected:
 * \brief Wektor przechowujacy wspolrzedne wierzcholkow poczatkowych bryly
 */
     Wektor<double, 3> wierzcholek0[8];
+
+    int a;
 
 public:
 
@@ -51,7 +53,6 @@ public:
         wierzcholek0[5].ustaw(Srodek[0] - A, Srodek[1] + A, Srodek[2] - A);
         wierzcholek0[6].ustaw(Srodek[0] - A, Srodek[1] - A, Srodek[2] - A);
         wierzcholek0[7].ustaw(Srodek[0] + A, Srodek[1] - A, Srodek[2] - A);
-
     }
     
 /*!
@@ -88,7 +89,7 @@ public:
 */
     int rysuj(std::shared_ptr<drawNS::Draw3DAPI> & api){
 
-        int a = api->draw_polyhedron(vector<vector<Point3D> > {{
+        a = api->draw_polyhedron(vector<vector<Point3D> > {{
         drawNS::Point3D(wierzcholek[0][0], wierzcholek[0][1], wierzcholek[0][2]), 
         drawNS::Point3D(wierzcholek[1][0], wierzcholek[1][1], wierzcholek[1][2]), 
         drawNS::Point3D(wierzcholek[2][0], wierzcholek[2][1], wierzcholek[2][2]), 
@@ -98,7 +99,7 @@ public:
         drawNS::Point3D(wierzcholek[5][0], wierzcholek[5][1], wierzcholek[5][2]), 
         drawNS::Point3D(wierzcholek[6][0], wierzcholek[6][1], wierzcholek[6][2]), 
         drawNS::Point3D(wierzcholek[7][0], wierzcholek[7][1], wierzcholek[7][2])
-        }},"red");
+        }},"black");
         
         //std::cout << Orientacja << std::endl;
         //std::cout << Srodek << std::endl;
@@ -117,18 +118,6 @@ public:
         }
     }
 
-/*!
-* \brief Metoda usuwajaca narysowana figure przypisana do parametru a
-* \param api lacze do gnuplota
-* \param a zmienna przypisana do rysunku
-*/
-    void usun(std::shared_ptr<drawNS::Draw3DAPI> & api, int a){
-
-/*!
-* \brief Wywolanie metody usuwajacej figure
-*/
-        api->erase_shape(a);
-    }
 };
 
 

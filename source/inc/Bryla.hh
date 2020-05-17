@@ -2,16 +2,26 @@
 #define BRYLA_HH
 
 #include <iostream>
+#include <unistd.h>
 #include "Wektor.hh"
 #include "MacierzOb.hh"
 #include "InterfejsRys.hh"
+
+/*!
+* \brief Funkcja czekajaca az uzytkownik wcisnie klawisz 'Enter'
+*/
+void wait4key() {
+  do {
+    std::cout << "\n Press 'Enter' to continue..." << std::endl;
+  } while(std::cin.get() != '\n');
+}
 
 /*!
 * \brief Klasa definiujaca Bryle w przestrzeni 3D
 * Zawiera pola Orientacji bryly wzgledem ukladu osi wspolrzednych 
 * oraz wektor wspolrzednych srodka bryly
 */
-class Bryla {
+class Bryla : public InterfejsRysowania {
 
 protected:
 
@@ -25,6 +35,8 @@ protected:
     Wektor<double, 3> Srodek;
 
 public: 
+
+    Bryla(){}
 
 /*!
 * \brief Metoda zmieniajaca orientacje o podana macierz obrotu
@@ -46,6 +58,21 @@ public:
         Srodek = Srodek + Orientacja * W;
         return Srodek;
     }
+
+
+/*!
+* \brief Metoda usuwajaca narysowana figure przypisana do parametru a
+* \param api lacze do gnuplota
+* \param a zmienna przypisana do rysunku
+*/
+    void usun(std::shared_ptr<drawNS::Draw3DAPI> & api, int a){
+
+/*!
+* \brief Wywolanie metody usuwajacej figure
+*/
+        api->erase_shape(a);
+    }
+
 };
 
 #endif
