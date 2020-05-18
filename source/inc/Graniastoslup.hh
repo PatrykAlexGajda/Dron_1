@@ -17,12 +17,12 @@ protected:
 public:
 
     Graniastoslup(){
-        wierzcholki[0].ustaw(Srodek[0], (Srodek[1] - A - B) + B, Srodek[2] + B);
-        wierzcholki[1].ustaw(Srodek[0] + (B*sqrt(3)/2), (Srodek[1] - A - B) + B, Srodek[2] + (B*0.5));
-        wierzcholki[2].ustaw(Srodek[0] + (B*sqrt(3)/2), (Srodek[1] - A - B) + B, Srodek[2] - (B*0.5));
-        wierzcholki[3].ustaw(Srodek[0], (Srodek[1] - A - B) + B, Srodek[2] - B);
-        wierzcholki[4].ustaw(Srodek[0] - (B*sqrt(3)/2), (Srodek[1] - A - B) + B, Srodek[2] - (B*0.5));
-        wierzcholki[5].ustaw(Srodek[0] - (B*sqrt(3)/2), (Srodek[1] - A - B) + B, Srodek[2] + (B*0.5));
+        wierzcholki[0].ustaw(Srodek[0], (Srodek[1] - A), Srodek[2] + B);
+        wierzcholki[1].ustaw(Srodek[0] + (B*sqrt(3)/2), (Srodek[1] - A), Srodek[2] + (B*0.5));
+        wierzcholki[2].ustaw(Srodek[0] + (B*sqrt(3)/2), (Srodek[1] - A), Srodek[2] - (B*0.5));
+        wierzcholki[3].ustaw(Srodek[0], (Srodek[1] - A), Srodek[2] - B);
+        wierzcholki[4].ustaw(Srodek[0] - (B*sqrt(3)/2), (Srodek[1] - A), Srodek[2] - (B*0.5));
+        wierzcholki[5].ustaw(Srodek[0] - (B*sqrt(3)/2), (Srodek[1] - A), Srodek[2] + (B*0.5));
 
         wierzcholki[6].ustaw(Srodek[0], (Srodek[1] - A - B), Srodek[2] + B);
         wierzcholki[7].ustaw(Srodek[0] + (B*sqrt(3)/2), (Srodek[1] - A - B), Srodek[2] + (B*0.5));
@@ -61,7 +61,15 @@ public:
         return b;
     }
 
-    void nowy_wierzcholekW(){
+    void nowy_wierzcholekW(Wektor<double, 3> srodekDrona, MacierzOb macierzDrona){
+
+        for(int i=0;i<12;i++){
+
+            wierzcholki[i] = srodekDrona + macierzDrona * Srodek + macierzDrona * Orientacja * wierzcholki0[i];
+        }
+    }
+
+    void nowy_wierzcholekO(){
 
         for(int i=0;i<12;i++){
 

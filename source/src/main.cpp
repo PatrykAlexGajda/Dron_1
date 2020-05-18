@@ -29,8 +29,6 @@ Dno X;
 Woda Y;
 X.rysuj_pow_dna(api);
 Y.rysuj_pow_wody(api);
-int a = D.rysuj(api);
-int b = W.rysujW(api);
 
 while(1){
 
@@ -40,20 +38,15 @@ while(1){
   std::cout << "q - koniec programu\n";
   std::cout << "Wybierz opcje:\t";
   std::cin >> czytaj;
-  api->erase_shape(a);
-  api->erase_shape(b);
 
   switch(czytaj){
 
     case 'z':{
-
+      char z = 'z';
       double kat=0;
       std::cout << "Podaj kat obrotu: ";
       std::cin >> kat;
-      MacierzOb mObZ;
-      mObZ.ObrotZ(kat);
-      D.ZmianaOrientacji(mObZ);
-      D.rysuj(api);
+      D.obracanieR(api, z, kat);
 
     } break;
 
@@ -62,8 +55,7 @@ while(1){
       double kat=0;
       std::cout << "Podaj kat obrotu: ";
       std::cin >> kat;
-      D.obracanie(api, x, kat);
-      W.obracanieW(api, kat);
+      D.obracanieR(api, x, kat);
 
     } break;
 
@@ -72,8 +64,7 @@ while(1){
       double odl;
       std::cout << "Podaj odleglosc: ";
       std::cin >> odl;
-      D.ruch(api, odl);
-      W.ruchW(api, odl);
+      D.RuchR(api, odl);
 
     } break;
 

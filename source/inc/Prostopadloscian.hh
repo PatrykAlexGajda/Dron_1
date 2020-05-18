@@ -99,7 +99,7 @@ public:
         drawNS::Point3D(wierzcholek[5][0], wierzcholek[5][1], wierzcholek[5][2]), 
         drawNS::Point3D(wierzcholek[6][0], wierzcholek[6][1], wierzcholek[6][2]), 
         drawNS::Point3D(wierzcholek[7][0], wierzcholek[7][1], wierzcholek[7][2])
-        }},"black");
+        }},"red");
         
         //std::cout << Orientacja << std::endl;
         //std::cout << Srodek << std::endl;
