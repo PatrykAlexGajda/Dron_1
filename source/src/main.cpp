@@ -24,11 +24,10 @@ int main(){
 std::shared_ptr<drawNS::Draw3DAPI> api(new APIGnuPlot3D(-R,R,-R,R,-R,R,0));
 char czytaj;
 Dron D;
-Wirnik W;
 Dno X;
 Woda Y;
-X.rysuj_pow_dna(api);
-Y.rysuj_pow_wody(api);
+X.rysuj(api);
+Y.rysuj(api);
 
 while(1){
 

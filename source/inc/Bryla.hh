@@ -36,6 +36,9 @@ protected:
 
 public: 
 
+/*!
+* \brief Konstruktor domyślny dla tworzenia zmiennej typu Bryla
+*/
     Bryla(){}
 
 /*!
@@ -65,11 +68,9 @@ public:
 * \param api lacze do gnuplota
 * \param a zmienna przypisana do rysunku
 */
+
     void usun(std::shared_ptr<drawNS::Draw3DAPI> & api, int a){
 
-/*!
-* \brief Wywolanie metody usuwajacej figure
-*/
         api->erase_shape(a);
     }
 

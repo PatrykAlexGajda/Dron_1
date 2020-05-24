@@ -3,7 +3,7 @@
 
 #include "Bryla.hh"
 #include "Wektor.hh"
-#define A 2
+#define A 3
 
 using std::vector;
 using drawNS::Point3D;

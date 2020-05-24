@@ -51,6 +51,9 @@ class Macierz {
     const Macierz Transpozycja() const;
 // Deklaracja metody wyliczajacej wyznacznik macierzy (metoda Laplace'a)
     TYP WyznacznikGauss() const;
+
+    TYP Wyznacznik() const;
+
 // Deklaracja metody odwracajacej macierz
     const Macierz Odwrotnosc() const;
 
@@ -66,6 +69,22 @@ class Macierz {
     Wektor<TYP, ROZMIAR> operator * (const Wektor<TYP, ROZMIAR> & W) const;
 // Deklaracja przeciazenia operator *= dla dwoch macierzy
     Macierz operator *= (const Macierz & M);
+
+    bool operator == (const Macierz & M){
+
+        bool result;
+
+        for(int i=0;i<3;i++){
+            for(int j=0;j<3;j++){
+                if(tab[i][j] == M[i][j]){
+                    result = true;
+                } else {
+                    result = false;
+                }
+            }
+        }
+        return result;
+    }
 };
 
 // Deklaracja przeciazenia operatora wczytywania dla maceirzy

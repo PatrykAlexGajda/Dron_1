@@ -36,6 +36,32 @@ public:
             tab[i][i] = 1;
         }
     }
+
+/*!
+* \brief Metoda sprawdzajaca czy dana macierz jest macierza obrotu
+* \param M badana macierz
+*/
+    void checkM(const Macierz & M) const{
+
+/*!
+* \brief Tworzenie macierzy jednostkowej
+*/
+        Macierz I;
+        for(int i=0;i<SIZE;i++){
+            I[i][i] = 1;
+        }
+
+/*!
+* \brief sprawdzenie czy wyznacznik podanej macierzy jest rowny 1 i czy jest ona ortagonalna
+*/
+        if((M.Wyznacznik() == 1) && (M.Transpozycja() * M == I)){
+            std::cout << "Macierz jest macierza obrotu." << std::endl;
+        } else {
+            std::cerr << "BLAD: Macierz nie jest macierza obrotu! Zamykanie programu." << std::endl;
+            exit(1);
+        }
+    }
+
 /*!
 * \brief Metoda obracajaca istniejaca macierz obrotu wokol osi Z
 * \param alfa kat o ktory obroci sie bryla
@@ -77,6 +103,10 @@ public:
         *this = temp;
     }
 
+/*!
+* \brief Metoda obracajaca istniejaca macierz obrotu wokol osi y
+* \param alfa kat o ktory obroci sie bryla
+*/
     void ObrotY(double alfa){
 
         MacierzOb temp;

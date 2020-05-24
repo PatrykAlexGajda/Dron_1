@@ -66,6 +66,18 @@ TYP Macierz<TYP, ROZMIAR>::WyznacznikGauss() const{
     return wyzn;
 }
 
+template <class TYP, int ROZMIAR>
+TYP Macierz<TYP, ROZMIAR>::Wyznacznik() const{
+
+    TYP wyzn;
+
+    wyzn = tab[0][0]*tab[1][1]*tab[2][2] + tab[0][1]*tab[1][2]*tab[2][0]
+    + tab[0][2]*tab[1][0]*tab[2][1] - tab[2][0]*tab[1][1]*tab[0][2]
+    - tab[2][1]*tab[1][2]*tab[0][0] - tab[2][2]*tab[1][0]*tab[0][1];
+
+    return wyzn;
+}
+
 
 // Metoda tworzy macierz odwrotna do macierzy z pola klasy
 // Zwraca te odwrotna macierz
